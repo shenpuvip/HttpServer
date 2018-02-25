@@ -42,7 +42,7 @@ namespace SS
 
     int Poller::loop_once(int waitMs)
     {
-        int nfds = epoll_wait(m_fd, activeEvents, sizeof(activeEvents), waitMs);
+        int nfds = epoll_wait(m_fd, activeEvents, sizeof(epoll_event)*conf.MAXEVENTS, waitMs);
         for(int i = 0; i < nfds; i ++)
         {
             HTTPConn *conn = (HTTPConn*)activeEvents[i].data.ptr;
